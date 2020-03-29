@@ -31,7 +31,7 @@
 		{
 			"productId":1,
 			"productName":"Apple",
-			"unitPrice":"1.99",
+			"unitPrice":100,
 			"productCount":2,
 			"totalPrice":200,
 			"notes":""
