@@ -45,11 +45,11 @@
 			"notes":""
 		},
 		{
-			"product_id":3,
-			"product_name":"Apple",
-			"unit_price":"1.99",
-			"total_price":"3.98",
-			"peoduct_count":2,
+			"productId":3,
+			"productName":"Apple",
+			"unitPrice":"1.99",
+			"totalPrice":"3.98",
+			"peoductCount":2,
 			"notes":""
 		}
 	]
