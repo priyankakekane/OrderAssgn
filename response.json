@@ -1,0 +1,56 @@
+{
+	"addressInfo":[
+		{
+			"billing_address":{
+				"firstName":"P",
+				"lastName":"k",
+				"addressLine1":"4C , B3 , 2nd Floor\nKumar Cerebrum complex, Kalyani Nagar",
+				"addressLine2":"4C , B3 , 2nd Floor",
+				"city":"Pune",
+				"country":"India",
+				"zipcode":"411014",
+				"state":"Maharashtra"
+			},
+			"shipping_address":{
+				"firstName":"P",
+				"lastName":"k",
+				"addressLine1":"4C , B3 , 2nd Floor\nKumar Cerebrum complex, Kalyani Nagar",
+				"addressLine2":"4C , B3 , 2nd Floor",
+				"city":"Pune",
+				"country":"India",
+				"zipcode":"411014",
+				"state":"Maharashtra"
+			}
+		}
+	],
+	"orderInfo":{
+		"orderDate":"",
+		"deliveryDate":""
+	},
+	"productInfo":[
+		{
+			"productId":1,
+			"productName":"Apple",
+			"unitPrice":"1.99",
+			"totalPrice":"3.98",
+			"peoductCount":2,
+			"notes":""
+		},
+		{
+			"productId":2,
+			"productName":"Apple",
+			"unitPrice":"1.99",
+			"totalPrice":"3.98",
+			"peoductCount":2,
+			"notes":""
+		},
+		{
+			"product_id":3,
+			"product_name":"Apple",
+			"unit_price":"1.99",
+			"total_price":"3.98",
+			"peoduct_count":2,
+			"notes":""
+		}
+	]
+}
