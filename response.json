@@ -33,23 +33,23 @@
 			"productName":"Apple",
 			"unitPrice":"1.99",
 			"productCount":2,
-			"totalPrice":"3.98",
+			"totalPrice":200,
 			"notes":""
 		},
 		{
 			"productId":2,
 			"productName":"Apple",
-			"unitPrice":"1.99",
+			"unitPrice":100,
 			"productCount":2,
-			"totalPrice":"3.98",
+			"totalPrice":200,
 			"notes":""
 		},
 		{
 			"productId":3,
 			"productName":"Apple",
-			"unitPrice":"1.99",
+			"unitPrice":200,
 			"productCount":2,
-			"totalPrice":"3.98",
+			"totalPrice":400,
 			"notes":""
 		}
 	]
