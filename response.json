@@ -1,5 +1,5 @@
 {
-	"addressInfo":[
+	"addressInfo":
 		{
 			"billing_address":{
 				"firstName":"P",
@@ -22,7 +22,7 @@
 				"state":"Maharashtra"
 			}
 		}
-	],
+	,
 	"orderInfo":{
 		"orderDate":"",
 		"deliveryDate":""
