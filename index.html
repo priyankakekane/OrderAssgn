@@ -118,6 +118,14 @@
             text-align: center;
             width: 40%;
             margin: 0 auto;
+            padding: 10px;
+            color:red;
+        }
+
+        #successMsg {
+            color:green;
+            font-weight: bold;
+            text-align: center;
         }
 
         
@@ -195,7 +203,9 @@
             </div>
             
         <div id="uniqueId"></div>
-        </div>
+        <div id="dateMsg"></div>
+        <div id="successMsg"></div>
+    </div>
         
 
     </div>
@@ -362,8 +372,8 @@
              .then((json)=>{
                  CreateTableFromJSON(json);
              });
-
-        
+        bdate.min = new Date().toISOString().split("T")[0];
+        sdate.min = new Date().toISOString().split("T")[0];
     }     
 
     function CreateTableFromJSON(json) {
@@ -470,41 +480,7 @@
             document.getElementById(id.id).value = totalPrice;
     }
 
-    // function validateFields() {
-    //         var flag = true;
-    //         var requiredElements = document.getElementById("myTable").querySelectorAll("[required]");
-    //         var billdate = document.getElementById("bdate").value;
-    //         var shipdate = document.getElementById("sdate").value;
-
-    //         if (billdate == "") {
-    //             console.log("enter Bill Date");
-    //             flag = false;
-    //         }
-    //         else {
-    //             flag = true;
-    //         }
-
-    //         if (shipdate == "") {
-    //             console.log("enter Bill Date");
-    //         }
-
-    //         for (var i = 0; i < requiredElements.length; i++) {
-    //             var e = requiredElements[i];
-    //             console.log(requiredElements[i].id);
-    //             if (!e.value) {
-    //                 flag = false;
-    //                 document.getElementById(requiredElements[i].id).classList.add("errorClass");
-    //             }
-    //             // else {
-    //             //     document.getElementById(requiredElements[i].id).classList.remove("errorClass");
-    //             // }
-
-    //         }
-
-    //     }
-
-
-
+    
     function submitProducts() {
 
         var flag = true;
@@ -514,15 +490,15 @@
         
 
         if(billdate == "" || shipdate == ""){
-           
-            document.getElementById("uniqueId").innerHTML = "Please Enter Date To Proceed Further";
-            document.getElementById("uniqueId").classList.add("errorClass");
+            document.getElementById("dateMsg").innerHTML = "Please Enter Date To Proceed Further !!!";
+            document.getElementById("dateMsg").classList.add("errorClass");
             flag = false;
         }
         else {
-            document.getElementById("uniqueId").innerHTML = "";
-            document.getElementById("uniqueId").classList.remove("errorClass");
+            document.getElementById("dateMsg").innerHTML = "";
+            document.getElementById("dateMsg").classList.remove("errorClass");
         }
+        
 
         
         var myTable = document.getElementById("myTable");
@@ -538,11 +514,10 @@
             else {
                 productIdArray.push(myTable.rows[i].cells[0].getElementsByTagName("input")[0].value);
                 document.getElementById("uniqueId").classList.remove("errorClass");
+                document.getElementById("uniqueId").innerHTML = "";
             }
-
-            
         }
-        console.log(productIdArray);
+       
 
         for (var i = 0; i < requiredElements.length; i++) {
             var e = requiredElements[i];            
@@ -561,15 +536,14 @@
         if (flag) {
             console.log("json submitted");
             generateJSON();
+            document.getElementById("successMsg").innerHTML = "JSON Submitted Successfully :)"
+            
         }
         else {
             console.log("not submitted");
         }
 
     }
-    
-
-   
 </script>
 
 </html>
