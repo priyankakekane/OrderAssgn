@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <title>Hello, world!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: Arial;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+            input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .orderMainBlock{
+            padding: 24px;
+            background-color: #eee;
+            min-height: 100vh;
+        }
+
+        .billBlock , .productBlock {
+            background-color: white;
+        }
+
+        .productBlock {
+            margin-top: 24px;
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        .blockLabel {
+            font-weight: bold;
+            margin: 0;
+           /* font-display: Arial !important; */
+        }
+
+        .grid-container {
+            display: grid;
+            grid-column-gap: 50px;
+            grid-template-columns: auto auto auto;
+            padding: 10px;
+        }
+
+        .grid-item {
+            padding: 20px;
+            font-size: 30px;
+            text-align: left;
+        }
+
+        .inputFormFields input , .productBlock input {
+            display: block;
+            width: 100%;
+            padding:5px 0 5px 5px;
+            margin: 12px 0;
+            border:1px solid #ddd;
+            font-size: 15px;
+            line-height: 17px;
+            border-radius: 2px;  
+        }
+
+        
+
+        .dateInput , textarea{
+            padding:5px 0 5px 5px;
+            margin: 12px 0;
+            border:1px solid #eee;
+            font-size: 15px;
+            line-height: 17px;
+            border-radius: 2px;  
+        }
+
+        #bdate, #sdate{
+            background: url('calendar.svg') no-repeat;
+            background-position-x: 98%;
+            background-position-y: center;
+        }
+
+        table{
+            text-align: left;
+        }
+
+        .button {
+            text-transform: uppercase;
+            font-size: 14px;
+            line-height: 16px;
+            background-color: #4a90e2;
+            color:white;
+            padding: 8px;
+            border-radius: 4px;
+            border:none;
+        }
+
+        .delBtn {
+            background-color: red;
+        }
+        
+
+        .totalPrice {
+            background-color: #eee;
+            padding: 5px 0 5px 5px;
+        }
+
+        @media (min-width: 320px) and (max-width:480px) {
+            .grid-container {
+                grid-template-columns: auto;
+            }
+        }
+    </style>
+</head>
+<body  onload="onLoad()">
+    <div class="orderMainBlock">
+        <div class="billBlock">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h5 class="blockLabel">
+                        Billing Address
+                    </h5>
+
+                    <form class="inputFormFields">
+                        <input type="text" id="bfname"  placeholder="First Name">
+                        <input type="text" id="blname"  placeholder="Last Name">
+                        <input type="text" id="baddr1"  placeholder="Address Line 1">
+                        <input type="text" id="baddr2"  placeholder="Address Line 2">
+                        <input type="text" id="bcity"   placeholder="City">
+                        <input type="text" id="bstate"  placeholder="State">
+                        <input type="number" id="bzipcode" placeholder="Zip Code">
+                        <input type="text" id="bcountry" placeholder="Country">
+                    </form>
+
+                    <h5 class="blockLabel">
+                        Order Date
+                    </h5>
+                    <input class="dateInput" type="date" id="bdate" placeholder="dd/mm/yyyy" required>
+                    
+                </div>
+                <div class="grid-item">
+
+                    <h5 class="blockLabel">
+                        Shipping Address
+                    </h5>
+                    
+                    <form class="inputFormFields">
+                        <input type="text" id="sfname" placeholder="First Name">
+                        <input type="text" id="slname" placeholder="Last Name">
+                        <input type="text" id="saddr1" placeholder="Address Line 1">
+                        <input type="text" id="saddr2" placeholder="Address Line 2">
+                        <input type="text" id="scity" placeholder="City">
+                        <input type="text" id="sstate" placeholder="State">
+                        <input type="number" id="szipcode" placeholder="Zip Code">
+                        <input type="text" id="scountry" placeholder="Country">
+                    </form>
+                    
+                    <h5 class="blockLabel">
+                        Order Date
+                    </h5>
+                    <input class="dateInput" type="date" id="sdate" placeholder="dd/mm/yyyy">
+                </div>
+               
+            </div>
+
+
+        </div>
+
+        <div class="productBlock">
+            <table id="myTable" cellspacing="10">
+
+            </table>
+            <button class="button" value="Add Product" onclick="addField();">Add Product</button>
+
+            <br>
+            <div style="text-align:right">
+                <button class="button" type="submit">SAVE</button>
+            </div>
+            
+        
+        </div>
+
+    </div>
+</body>
+<script>
+    var jsonData = {};
+    function addField(argument) {
+            var myTable = document.getElementById("myTable");
+            var currentIndex = myTable.rows.length;
+            var currentRow = myTable.insertRow(-1);
+
+            var productIdBlock = document.createElement("input");
+            productIdBlock.setAttribute("name", "productId" + currentIndex);
+            productIdBlock.setAttribute("type", "number");
+            productIdBlock.setAttribute("required", true);
+
+            var productNameBlock = document.createElement("input");
+            productNameBlock.setAttribute("name", "productName" + currentIndex);
+            productNameBlock.setAttribute("type", "text");
+
+            var productQty = document.createElement("input");
+            productQty.setAttribute("name", "productQty" + currentIndex);
+            productQty.setAttribute("type", "number");
+            productQty.setAttribute("value", 0);
+            
+
+
+            var productUnitPrice = document.createElement("input");
+            productUnitPrice.setAttribute("name", "productUnitPrice" + currentIndex);
+            productUnitPrice.setAttribute("type", "number");
+            productUnitPrice.setAttribute("value", 0);
+           
+
+            var productTotalPrice = document.createElement("input");
+            productTotalPrice.setAttribute("name", "productTotalPrice" + currentIndex);
+            productTotalPrice.setAttribute("readonly", true);
+            productTotalPrice.setAttribute("id", 'totalPrice'+currentIndex);
+            productTotalPrice.setAttribute("value", 0000);
+            productTotalPrice.setAttribute("class", "totalPrice");
+
+
+            var productNotes = document.createElement("textarea");
+            productNotes.setAttribute("name", "productNote" + currentIndex);
+            
+            var deleteProducBox = document.createElement("input");
+            deleteProducBox.setAttribute("type", "button");
+            deleteProducBox.setAttribute("value", "DELETE");
+            deleteProducBox.setAttribute("onclick", "deleteProduct(this);");
+            deleteProducBox.setAttribute("class", "button delBtn");
+
+            var currentCell = currentRow.insertCell(-1);
+            currentCell.appendChild(productIdBlock);
+
+            currentCell = currentRow.insertCell(-1);
+            currentCell.appendChild(productNameBlock);
+
+            currentCell = currentRow.insertCell(-1);
+            currentCell.appendChild(productQty);
+
+            currentCell = currentRow.insertCell(-1);
+            currentCell.appendChild(productUnitPrice);
+
+            currentCell = currentRow.insertCell(-1);
+            currentCell.appendChild(productTotalPrice);
+
+            currentCell = currentRow.insertCell(-1);
+            currentCell.appendChild(productNotes);
+
+            currentCell = currentRow.insertCell(-1);
+            currentCell.appendChild(deleteProducBox);
+
+            var productUnitPriceC = productUnitPrice.getAttribute("value");
+            productQty.setAttribute("onchange", "calculatePrice(this.value,"+productUnitPriceC+",totalPrice"+currentIndex+")");
+
+            var productQtyC = productQty.getAttribute("value");
+            productUnitPrice.setAttribute("onchange", "calculatePrice(this.value,"+productQtyC + ",totalPrice"+currentIndex + ")");
+        }
+
+    function deleteProduct(o) {
+            //no clue what to put here?
+            console.log(o);
+            var p = o.parentNode.parentNode;
+            p.parentNode.removeChild(p);
+        }    
+
+
+    function onLoad() {
+         fetch("https://raw.githubusercontent.com/priyankakekane/OrderAssgn/master/response.json")
+             .then(response => response.json())
+             .then((json)=>{
+                 CreateTableFromJSON(json);
+             });
+
+        
+    }     
+
+    function CreateTableFromJSON(json) {
+        var billDetails;
+        var shippingDetails;
+        var productDetails;
+
+        billDetails = json.addressInfo.billing_address;
+        productDetails = json.productInfo;
+        shippingDetails = json.addressInfo.shipping_address;
+        populateBillingAddress(billDetails);
+        populateShippingAddress(shippingDetails);
+        
+        document.getElementById('myTable').innerHTML = populateProductTable(productDetails, 'table');
+
+    }
+
+
+    function populateBillingAddress(billObject) {
+        
+        document.getElementById("bfname").value = billObject.firstName;
+        document.getElementById("blname").value = billObject.lastName;
+        document.getElementById("baddr1").value = billObject.addressLine1;
+        document.getElementById("baddr2").value = billObject.addressLine2;
+        document.getElementById("bcity").value = billObject.city;
+        document.getElementById("bstate").value = billObject.state;
+        document.getElementById("bzipcode").value = billObject.zipcode;
+        document.getElementById("bcountry").value = billObject.country;
+    }
+
+    function populateShippingAddress(billObject) {
+            
+            document.getElementById("sfname").value = billObject.firstName;
+            document.getElementById("slname").value = billObject.lastName;
+            document.getElementById("saddr1").value = billObject.addressLine1;
+            document.getElementById("saddr2").value = billObject.addressLine2;
+            document.getElementById("scity").value = billObject.city;
+            document.getElementById("sstate").value = billObject.state;
+            document.getElementById("szipcode").value = billObject.zipcode;
+            document.getElementById("scountry").value = billObject.country;
+    }
+            
+  
+    function populateProductTable(products, classes) {
+        var cols = Object.keys(products[0]);
+        var headerRow = '';
+        var bodyRows = '';
+        classes = classes || '';
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        cols.map(function (col) {
+            headerRow += '<th>' + capitalizeFirstLetter(col) + '</th>';
+        });
+        
+        
+
+         products.map(function (row) {
+            bodyRows += '<tr id='+row.productId+'>';
+            cols.map(function (colName) {
+                switch (colName) {
+                    case "productId":
+                        bodyRows += '<td>' + '<input required type="number" value=' + row[colName] + ">" + '</td>';
+                        break;
+                    case "unitPrice":
+                        bodyRows += '<td>' + '<input required type="number" value=' + row[colName] + " id="+row.productName+row.productId +" onchange=calculatePrice(this.value,"+row.productCount+",totalPrice"+row.productId+")>" + '</td>';
+                        break;
+                    case "totalPrice":
+                        bodyRows += '<td>' + '<input class="totalPrice" required type="number" readonly value=' + row[colName] + " id='totalPrice"+row.productId+"'>" + '</td>';
+                        break;
+                    case "productCount":
+                        bodyRows += '<td>' + '<input required type="number" value=' + row[colName]+ " id="+row.productName + row.productId+" onchange=calculatePrice(this.value,"+ row.unitPrice+",totalPrice" + row.productId + ")>" + '</td>';
+                        break;   
+                    case "notes":
+                        bodyRows += '<td>' + '<textarea value=' + row[colName] + "></textarea>" + '</td>';
+                        break;
+                    case "productName":
+                        bodyRows += '<td>' + '<input required type="text" value=' + row[colName] + ">" + '</td>';
+                        break;
+                    default:
+                        break;
+                }
+            })
+
+            bodyRows +='<td>'+'<button class="button delBtn" onclick = "deleteProduct(this)">'+"DELETE" +'</button></td >';
+
+            bodyRows += '</tr>';
+        });
+
+
+        return '<table class="' +
+            classes +
+            '"><thead><tr>' +
+            headerRow +
+            '</tr></thead><tbody>' +
+            bodyRows +
+            '</tbody></table>';
+    }
+
+    function calculatePrice(val, val1, id) {
+            var totalPrice = val*val1;
+            console.log(val*val1);
+            console.log(id.id);
+            document.getElementById(id.id).value = totalPrice;
+    }
+    
+    
+</script>
+
+</html>
