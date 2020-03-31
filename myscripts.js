@@ -7,7 +7,12 @@ function onLoad() {
         });
     bdate.min = new Date().toISOString().split("T")[0];
     sdate.min = new Date().toISOString().split("T")[0];
-}     
+} 
+
+function setMinDate() {
+        var a = document.getElementById("bdate").value;
+        sdate.min = new Date(a).toISOString().split("T")[0];
+}
 
 
 function generateJSON(){
