@@ -276,7 +276,7 @@ function calculatePrice(val, val1, id) {
 
 
 function submitProducts() {
-
+    document.getElementById("successMsg").innerHTML = ""
     var flag = true;
     var requiredElements = document.getElementById("myTable").querySelectorAll("[required]");
     var billdate = document.getElementById("bdate").value;

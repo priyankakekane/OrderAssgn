@@ -104,7 +104,7 @@ table{
 }
 
 .errorClass {
-    border: 1px solid red;
+    border: 1px solid red !important;
     text-align: center;
     width: 40%;
     margin: 0 auto;
